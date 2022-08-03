@@ -24,7 +24,7 @@ jobs:
 
       - name: cmake
         shell: cmd
-        run: cd libredwg && cmake.exe -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build
+        run: cd libredwg && cmake.exe -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DLIBREDWG_LIBONLY=ON -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build
         
       - name: dirty work - remove alloca.h detection
         shell: cmd
