@@ -21,15 +21,23 @@ jobs:
       - name: git clone
         shell: cmd
         run: git clone --recursive https://github.com/LibreDWG/libredwg.git && cd libredwg && git checkout ${{ env.tagName }}
-
+      
+      - name: aria2c
+        shell: cmd
+        run:  aria2c https://github.com/dirkarnez/textfile-direct-modifier/releases/download/v1.0.0/textfile-direct-modifier-v1.0.0.zip && 7z.exe x textfile-direct-modifier-v1.0.0.zip
+      
+      - name: dirty work - remove testing
+        shell: cmd
+        run: 'cd libredwg && ${{github.workspace}}\textfile-direct-modifier.exe --source=CMakeLists.txt --target=CMakeLists.txt --old="add_subdirectory(test/unit-testing)" --new="# add_subdirectory(test/unit-testing)"' 
+      
       - name: cmake
         shell: cmd
         run: cd libredwg && cmake.exe -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DLIBREDWG_LIBONLY=ON -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build
         
       - name: dirty work - remove alloca.h detection
         shell: cmd
-        run: 'cd libredwg\build\src && aria2c https://github.com/dirkarnez/textfile-direct-modifier/releases/download/v1.0.0/textfile-direct-modifier-v1.0.0.zip && 7z.exe x textfile-direct-modifier-v1.0.0.zip && textfile-direct-modifier.exe --source=config.h --target=config.h --old="#define HAVE_ALLOCA 1" --new="/* #define HAVE_ALLOCA 1*/" && textfile-direct-modifier.exe --source=config.h --target=config.h --old="#define HAVE_ALLOCA_H 1" --new="/* #define HAVE_ALLOCA_H 1 */"' 
-        
+        run: 'cd libredwg\build\src && ${{github.workspace}}\textfile-direct-modifier.exe --source=config.h --target=config.h --old="#define HAVE_ALLOCA 1" --new="/* #define HAVE_ALLOCA 1*/" && ${{github.workspace}}\textfile-direct-modifier.exe --source=config.h --target=config.h --old="#define HAVE_ALLOCA_H 1" --new="/* #define HAVE_ALLOCA_H 1 */"' 
+      
       - name: cmake build and install
         shell: cmd
         run: cd libredwg\build && cmake --build . && cmake --install . 
