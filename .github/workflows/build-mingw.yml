@@ -28,7 +28,7 @@ jobs:
         
       - name: cmake build and install
         shell: cmd
-        run: cd libredwg\build && cmake --build . && cmake --install .
+        run: cd libredwg\build && cmake --build . -DCMAKE_C_FLAGS="-DHAVE_ALLOCA_H=0" && cmake --install . -DCMAKE_C_FLAGS="-DHAVE_ALLOCA_H=0"
         
       - name: Archive Release
         uses: thedoctor0/zip-release@master
