@@ -22,7 +22,7 @@ jobs:
         shell: cmd
         run: git clone --recursive https://github.com/LibreDWG/libredwg.git && cd libredwg && git checkout ${{ env.tagName }}
 
-      - name: dirty work: remove alloc.h detection
+      - name: dirty work - remove alloca.h detection
         shell: cmd
         run: cd libredwg && aria2c https://github.com/dirkarnez/textfile-direct-modifier/releases/download/v1.0.0/textfile-direct-modifier-v1.0.0.zip && 7z.exe x textfile-direct-modifier-v1.0.0.zip && textfile-direct-modifier.exe --source=CMakeLists.txt --target=CMakeLists.txt --old="CHECK_INCLUDE_FILE(\"alloca.h\" HAVE_ALLOCA_H)" --new="#CHECK_INCLUDE_FILE(\"alloca.h\" HAVE_ALLOCA_H)" 
         
