@@ -28,7 +28,7 @@ jobs:
         
       - name: dirty work - remove alloca.h detection
         shell: cmd
-        run: cd libredwg\build\src && aria2c https://github.com/dirkarnez/textfile-direct-modifier/releases/download/v1.0.0/textfile-direct-modifier-v1.0.0.zip && 7z.exe x textfile-direct-modifier-v1.0.0.zip && textfile-direct-modifier.exe --source=config.h --target=config.h --old="#define HAVE_ALLOCA 1" --new="# #define HAVE_ALLOCA 1" && textfile-direct-modifier.exe --source=config.h --target=config.h --old="#define HAVE_ALLOCA_H 1" --new="# #define HAVE_ALLOCA_H 1" 
+        run: 'cd libredwg\build\src && aria2c https://github.com/dirkarnez/textfile-direct-modifier/releases/download/v1.0.0/textfile-direct-modifier-v1.0.0.zip && 7z.exe x textfile-direct-modifier-v1.0.0.zip && textfile-direct-modifier.exe --source=config.h --target=config.h --old="#define HAVE_ALLOCA 1" --new="# #define HAVE_ALLOCA 1" && textfile-direct-modifier.exe --source=config.h --target=config.h --old="#define HAVE_ALLOCA_H 1" --new="# #define HAVE_ALLOCA_H 1"' 
         
       - name: cmake build and install
         shell: cmd
