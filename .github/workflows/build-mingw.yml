@@ -24,7 +24,7 @@ jobs:
 
       - name: cmake
         shell: cmd
-        run: cd libredwg && cmake.exe -E env CFLAGS="-DHAVE_ALLOCA_H=0" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build
+        run: cd libredwg && cmake.exe -DCMAKE_C_FLAGS="-DHAVE_ALLOCA_H=0" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build
         
       - name: cmake build and install
         shell: cmd
