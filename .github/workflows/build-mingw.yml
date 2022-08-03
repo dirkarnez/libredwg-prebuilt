@@ -24,22 +24,22 @@ jobs:
 
       - name: cmake
         shell: cmd
-        run: cd libredwg && cmake.exe -DCMAKE_C_FLAGS="-DHAVE_ALLOCA_H=0" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build
+        run: cd libredwg && cmake.exe -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build
         
-      - name: cmake build and install
-        shell: cmd
-        run: cd libredwg\build && cmake --build . -DCMAKE_C_FLAGS="-DHAVE_ALLOCA_H=0" && cmake --install . -DCMAKE_C_FLAGS="-DHAVE_ALLOCA_H=0"
+#       - name: cmake build and install
+#         shell: cmd
+#         run: cd libredwg\build && cmake --build . && cmake --install . 
         
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          directory: "libredwg/build/${{ env.cmakeInstallationPath }}"
+          directory: "libredwg" # "libredwg/build/${{ env.cmakeInstallationPath }}"
           filename: "${{ env.mingwTargetZip }}"
         
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "libredwg/build/${{ env.cmakeInstallationPath }}/${{ env.mingwTargetZip }}"
+          artifacts: "libredwg/${{ env.mingwTargetZip }}" # "libredwg/build/${{ env.cmakeInstallationPath }}/${{ env.mingwTargetZip }}"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
