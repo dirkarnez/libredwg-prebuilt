@@ -15,23 +15,21 @@ jobs:
       tagName: 0.12.5 #target tag
       mingwTargetZip: libredwg-${{ github.ref_name }}-x86_64-posix-seh-rev0-8.1.0.zip
     steps:
-      - name: check mingw version
-        run: gcc --version
-        
       - name: git clone
         shell: cmd
         run: git clone --recursive https://github.com/LibreDWG/libredwg.git && cd libredwg && git checkout ${{ env.tagName }}
       
       - name: aria2c
         shell: cmd
-        run:  aria2c https://udomain.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/seh/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z && 7z.exe x x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
+        run:  curl https://udomain.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/seh/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z -L -O -J && 7z.exe x x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
         
-      - name: cmake generate, build and install
+      - name: set PATH, check mingw version, cmake generate, build and install
         shell: cmd
         run: |
             set PATH=^
             ${{github.workspace}}\mingw64;^
             ${{github.workspace}}\mingw64\bin;^
+            gcc --version &&^
             cd libredwg && cmake.exe -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DLIBREDWG_LIBONLY=ON -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build &&^
             cd build && cmake --build . && cmake --install . 
         
