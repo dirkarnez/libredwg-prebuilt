@@ -21,7 +21,7 @@ jobs:
       
       - name: aria2c
         shell: cmd
-        run:  curl https://udomain.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/seh/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z -L -O -J && 7z.exe x x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
+        run:  curl https://github.com/2641797006/c/blob/master/GCC-zip/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z?raw=true -L -O -J && 7z.exe x x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
         
       - name: set PATH, check mingw version, cmake generate, build and install
         shell: cmd
