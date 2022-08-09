@@ -19,9 +19,9 @@ jobs:
         shell: cmd
         run: git clone --recursive https://github.com/LibreDWG/libredwg.git && cd libredwg && git checkout ${{ env.tagName }}
       
-      - name: aria2c
+      - name: curl
         shell: cmd
-        run:  curl https://github.com/2641797006/c/blob/master/GCC-zip/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z?raw=true -L -O -J && 7z.exe x x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
+        run:  cd /d ${{github.workspace}} && curl https://github.com/2641797006/c/blob/master/GCC-zip/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z?raw=true -L -O -J && dir && 7z.exe x x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
         
       - name: set PATH, check mingw version, cmake generate, build and install
         shell: cmd
