@@ -30,8 +30,8 @@ jobs:
         shell: cmd
         run: |
             set PATH=^
-            ${{github.workspace}\mingw64;^
-            ${{github.workspace}\mingw64\bin;^
+            ${{github.workspace}}\mingw64;^
+            ${{github.workspace}}\mingw64\bin;^
             cd libredwg && cmake.exe -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DLIBREDWG_LIBONLY=ON -DCMAKE_INSTALL_PREFIX="build/${{ env.cmakeInstallationPath }}" -B./build &&^
             cd build && cmake --build . && cmake --install . 
         
