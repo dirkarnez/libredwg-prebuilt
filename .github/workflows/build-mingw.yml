@@ -13,8 +13,8 @@ jobs:
     env:
       libraryName: libredwg
       cmakeInstallationPath: libredwg-installation
-      # tagName: 0.12.5 # target tag
-      mingwTargetZip: libredwg-${{ github.ref_name }}-x86_64-posix-seh-rev0-8.1.0.zip
+      tagName: 0.12.5.5971 # target tag
+      mingwTargetZip: libredwg-${{ github.ref_name }}-mingw64-x86_64-posix-seh-rev0-8.1.0.zip
     steps:
       - name: git clone
         shell: cmd
